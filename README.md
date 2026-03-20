@@ -26,22 +26,24 @@ npm run preview
 
 ## Deploy
 
-Point **Vercel / Netlify** (or similar) at **this repository** with:
+**Vercel (recommended):** connect the repo; use defaults or:
 
-- **Root directory:** repository root (this folder after clone)
+- **Root directory:** repository root
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
 
-## Optional: real PDF from the UI (local only)
+`vercel.json` skips downloading Puppeteer’s bundled Chromium at install time; **Download PDF** uses the serverless route `api/pdf.js` (`@sparticuz/chromium` + `md-mermaid-pdf`). **Function timeout** is set to 60s — on the Hobby plan Vercel may cap execution shorter; upgrade or simplify docs if exports time out.
+
+**Netlify / pure static hosts:** there is no `/api/pdf` unless you add your own backend; use the CLI locally or deploy to Vercel for in-browser download.
+
+## PDF from the UI (local dev)
 
 Requires Node + Chromium (via `md-mermaid-pdf` → Puppeteer).
 
 1. Terminal A: `npm run dev:api` (default port **3001**).
-2. Terminal B: `VITE_PDF_API=1 npm run dev`
+2. Terminal B: `npm run dev` — Vite proxies `/api` to the PDF server.
 
 Set **`PDF_API_PORT`** if 3001 is in use.
-
-Static hosting has **no** backend; the export dialog falls back to CLI instructions (`npx md-mermaid-pdf …`).
 
 ## CI note
 
