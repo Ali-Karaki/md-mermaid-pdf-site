@@ -1,0 +1,48 @@
+# Deploys the repo to Railway via CLI (upload + Docker build on Railway).
+# Setup: GitHub → Settings → Secrets and variables → Actions
+#   - Secret: RAILWAY_TOKEN  (Project token from Railway: Project → Settings → Tokens)
+# Optional variables (defaults match this repo’s service name):
+#   - RAILWAY_SERVICE     default: md-mermaid-pdf-site
+#   - RAILWAY_ENVIRONMENT default: production
+#
+# If the service is already connected to GitHub inside Railway, either disable that
+# trigger or remove this workflow to avoid two deploys per push.
+
+name: CD — Railway
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: railway-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_SERVICE: ${{ vars.RAILWAY_SERVICE }}
+          RAILWAY_ENVIRONMENT: ${{ vars.RAILWAY_ENVIRONMENT }}
+        run: |
+          set -e
+          if [ -z "${RAILWAY_TOKEN}" ]; then
+            echo "::error::RAILWAY_TOKEN is not set. Add a Railway project token: Repo Settings → Secrets → RAILWAY_TOKEN"
+            exit 1
+          fi
+          SVC="${RAILWAY_SERVICE:-md-mermaid-pdf-site}"
+          ENV_NAME="${RAILWAY_ENVIRONMENT:-production}"
+          npx --yes @railway/cli@latest up \
+            --service "$SVC" \
+            --environment "$ENV_NAME" \
+            --ci \
+            --detach

@@ -43,6 +43,17 @@ npm start
 2. After the first successful deploy: **Settings → Networking → Generate domain** (or attach your own).
 3. Optional: increase **memory** if large Mermaid diagrams time out (PDF generation is Chromium-heavy).
 
+### GitHub → Railway CI/CD
+
+You can wire deploys in two ways (pick **one** per repo so you don’t double-build on every push):
+
+| Approach | What to do |
+|----------|------------|
+| **Native Railway ↔ GitHub** | In Railway: connect this GitHub repo on the service (**Settings → Source** / deploy triggers). Pushes to the chosen branch deploy automatically. No Actions secret required. |
+| **GitHub Actions** | Add a [project token](https://docs.railway.com/guides/cli#tokens): Railway **Project → Settings → Tokens** → create token. In GitHub: **Settings → Secrets and variables → Actions** → **New repository secret** → name **`RAILWAY_TOKEN`**, paste the token. The workflow [`.github/workflows/deploy-railway.yml`](.github/workflows/deploy-railway.yml) runs on every push to **`main`** (and **workflow_dispatch**). Optional **Variables**: **`RAILWAY_SERVICE`** (default `md-mermaid-pdf-site`), **`RAILWAY_ENVIRONMENT`** (default `production`). If you use this workflow, **turn off** Railway’s built-in GitHub auto-deploy for the same branch, or every push will trigger two deploys. |
+
+`RAILWAY_TOKEN` must be a **project token** (not a personal API token) for `railway up` in CI — see [Railway CLI / Tokens](https://docs.railway.com/guides/cli#tokens).
+
 **Chromium in Docker:** the app adds **`--no-sandbox`** (etc.) when it detects Docker or Railway, because the process often runs as **root** in containers and stock Chromium refuses that without those flags. This is normal for headless PDF on PaaS, not a sign Railway is “not a real server.”
 
 **Cursor + Railway MCP:** add the [Railway MCP server](https://docs.railway.com/reference/mcp-server) (see [`.cursor/mcp.json`](.cursor/mcp.json) in this repo). Install and log in with the [Railway CLI](https://docs.railway.com/cli) first (`railway login`).
