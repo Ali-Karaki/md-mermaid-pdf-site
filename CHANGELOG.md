@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- `md-mermaid-pdf` → `^0.1.2` (npm readme / homepage metadata release)
+
 ## [0.0.0] - 2026-03-21
 
 ### Added
