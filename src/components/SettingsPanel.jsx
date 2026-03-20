@@ -82,7 +82,7 @@ export function SettingsPanel({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <div className="space-y-2">
         <Label className="text-xs">PDF format</Label>
         <Select value={pdfFormat} onValueChange={onPdfFormatChange}>

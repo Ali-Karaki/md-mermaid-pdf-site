@@ -14,6 +14,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Marketing “Before vs after” section and `public/before-code-block.svg` / `public/after-rendered.svg`
 
+### Changed
+
+- Demo layout: wider max width, larger column gaps, asymmetric grid (more space for Markdown + Preview, fixed-width settings sidebar), taller panes (`min(420px, 52vh)`), clearer panel chrome and intro copy
+
 ## [0.0.0] - 2026-03-21
 
 ### Added
