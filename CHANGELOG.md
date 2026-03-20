@@ -6,8 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **Railway** production path: [`Dockerfile`](Dockerfile) (Debian Chromium + `PUPPETEER_EXECUTABLE_PATH`; build runs **`npm ci`** without **`NODE_ENV=production`** so **Vite** is installed, then **`npm prune --omit=dev`**), [`railway.toml`](railway.toml), [`server/prod.mjs`](server/prod.mjs) serving **`dist/`** and **`POST /api/pdf`**, shared [`server/pdf-handler.mjs`](server/pdf-handler.mjs), **`npm start`**
+- [`.cursor/mcp.json`](.cursor/mcp.json) — [Railway MCP server](https://docs.railway.com/reference/mcp-server) for Cursor (requires Railway CLI + `railway login`)
+
 ### Changed
 
+- **Deploy target:** **Railway** (Docker) instead of **Vercel**; removed **`vercel.json`**, **`api/pdf.js`**, and **`@sparticuz/chromium`**
 - `md-mermaid-pdf` → `^0.1.2` (npm readme / homepage metadata release)
 
 ### Removed
@@ -18,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Demo layout: wider max width, larger column gaps, asymmetric grid (more space for Markdown + Preview, fixed-width settings sidebar), taller panes (`min(420px, 52vh)`), clearer panel chrome and intro copy
 - Demo (desktop): **Markdown** and **Preview** are a single full-width column with a tab toggle; settings stay in the sidebar (no three narrow columns)
-- **Download PDF** posts to `/api/pdf` and saves the file (no modal). Vercel: `api/pdf.js` + `@sparticuz/chromium`. Local: `npm run dev:api` + `npm run dev` (proxy). `VITE_PDF_API` removed
+- **Download PDF** posts to `/api/pdf` and saves the file (no modal). Production: same route on **`server/prod.mjs`**. Local: `npm run dev:api` + `npm run dev` (proxy). `VITE_PDF_API` removed
 
 ### Removed
 
