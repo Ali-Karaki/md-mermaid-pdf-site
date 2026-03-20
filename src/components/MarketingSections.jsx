@@ -87,14 +87,6 @@ const cliCommands = [
   'npx mmdpdf doc.md   # alias',
 ]
 
-const useCases = [
-  'Engineering & architecture docs',
-  'Runbooks, ADRs, internal wikis exported to PDF',
-  'Reports, study notes, team handbooks',
-  'Slide-style PDFs (preset: slides)',
-  'CI-generated PDF artifacts (Action + mermaidSource: bundled)',
-]
-
 export function MarketingSections() {
   return (
     <>
@@ -201,23 +193,6 @@ export function MarketingSections() {
             </Button>
           </CardContent>
         </Card>
-      </MotionSection>
-
-      <MotionSection
-        className="w-full max-w-4xl mt-16 md:mt-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.35 }}
-      >
-        <h2 className="text-2xl font-semibold text-center mb-8">Use cases</h2>
-        <ul className="space-y-2 text-sm text-muted-foreground max-w-xl mx-auto">
-          {useCases.map((u, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <span className="text-primary shrink-0">→</span>
-              {u}
-            </li>
-          ))}
-        </ul>
       </MotionSection>
     </>
   )

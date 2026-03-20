@@ -200,15 +200,7 @@ Group for scannability; include **all** relevant bullets:
 - Node ≥ 20.16, npm ≥ 10.8 (engines)  
 - CommonJS package; ESM via interop  
 
-### 4.7 Use cases
-
-- Engineering & architecture docs  
-- Runbooks, ADRs, internal wikis exported to PDF  
-- Reports, study notes, team handbooks  
-- Slide-style PDFs (`preset: 'slides'`)  
-- CI-generated PDF artifacts (Action + `mermaidSource: 'bundled'`)  
-
-### 4.8 Power user / “CLI cheat sheet”
+### 4.7 Power user / “CLI cheat sheet”
 
 Short code block section:
 
@@ -226,7 +218,7 @@ npx mmdpdf doc.md   # alias
 
 Link to full README for programmatic options.
 
-### 4.9 Footer
+### 4.8 Footer
 
 - npm, GitHub, License **MIT**  
 - Links: **Issues**, **Changelog** (`CHANGELOG.md` on GitHub), **Recipes** (`docs/recipes.md`), optional **Contributing** / **Security** if present in repo  
@@ -273,7 +265,7 @@ Package keywords already include: `mermaid-diagrams`, `markdown-to-pdf`, `docs-g
 
 ## 8. Maintenance
 
-When the library gains features, update **§4.6** and **§4.9** in this file first, then refresh the site. This document should remain the **exhaustive** prompt/spec for the public face of the product.
+When the library gains features, update **§4.6** and **§4.8** in this file first, then refresh the site. This document should remain the **exhaustive** prompt/spec for the public face of the product.
 
 ---
 
