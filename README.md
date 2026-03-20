@@ -2,7 +2,7 @@
 
 Marketing site and **live Markdown + Mermaid preview** for [**md-mermaid-pdf**](https://github.com/Ali-Karaki/md-mermaid-pdf) (Markdown → PDF with diagrams that render).
 
-- **Live site:** [md-mermaid-pdf-site.vercel.app](https://md-mermaid-pdf-site.vercel.app/)
+- **Live site:** deploy on [Railway](https://railway.app) (see **Deploy**); after you assign a public URL, update the **Live site** link here and **`og:url`** in [`index.html`](index.html) for correct social previews.
 - **npm:** [md-mermaid-pdf](https://www.npmjs.com/package/md-mermaid-pdf)
 - **Library repo:** [github.com/Ali-Karaki/md-mermaid-pdf](https://github.com/Ali-Karaki/md-mermaid-pdf)
 
@@ -24,17 +24,28 @@ npm run build
 npm run preview
 ```
 
+## Production (local smoke test)
+
+After `npm run build`, the same server Railway runs:
+
+```bash
+npm start
+# http://localhost:3000 — static `dist/` + POST /api/pdf
+```
+
+`PORT` overrides the listen port (Railway sets it automatically).
+
 ## Deploy
 
-**Vercel (recommended):** connect the repo; use defaults or:
+**Railway (recommended):** connect this repo, keep **root directory** at the repo root. The project includes [`Dockerfile`](Dockerfile) and [`railway.toml`](railway.toml) so Railway builds a **Docker** image: `npm ci` → `npm run build` → `node server/prod.mjs`. The image installs **system Chromium** and sets **`PUPPETEER_EXECUTABLE_PATH`** so **`md-mermaid-pdf`** / Puppeteer can render PDFs without Vercel-style serverless hacks.
 
-- **Root directory:** repository root
-- **Build command:** `npm run build`
-- **Output directory:** `dist`
+1. [Railway Dashboard](https://railway.app) → **New Project** → **Deploy from GitHub** → select this repository.
+2. After the first successful deploy: **Settings → Networking → Generate domain** (or attach your own).
+3. Optional: increase **memory** if large Mermaid diagrams time out (PDF generation is Chromium-heavy).
 
-`vercel.json` skips downloading Puppeteer’s bundled Chromium at install time; **Download PDF** uses the serverless route `api/pdf.js` (`@sparticuz/chromium` + `md-mermaid-pdf`). On Vercel, `api/pdf.js` extracts **`al2023.tar.br`** and sets **`LD_LIBRARY_PATH`** (Sparticuz only does this automatically on AWS Lambda; without it Chromium fails with missing **`libnss3.so`**). **`vercel.json`** sets **`includeFiles`** to **one** glob string (brace expansion `{…}` for several paths—**not** a JSON array, which Vercel rejects) so the Node bundler ships files loaded by **runtime paths**: **`md-mermaid-pdf`**, **`mermaid.min.js`**, **`highlight.js`** styles, **`md-to-pdf/dist`**. Without that, **`ENOENT`** on e.g. `document-dark.css` is expected. We can’t run a real Vercel deploy from CI; this repo’s workflow checks those paths exist after **`npm ci`** so a broken npm publish is caught early. If production still fails, open the function log and look for **`[api/pdf] BUNDLE_MISSING`** (means `includeFiles` still didn’t apply—check Vercel’s build output or glob paths). **Function timeout** is 60s — Hobby may cap lower.
+**Cursor + Railway MCP:** add the [Railway MCP server](https://docs.railway.com/reference/mcp-server) (see [`.cursor/mcp.json`](.cursor/mcp.json) in this repo). Install and log in with the [Railway CLI](https://docs.railway.com/cli) first (`railway login`).
 
-**Netlify / pure static hosts:** there is no `/api/pdf` unless you add your own backend; use the CLI locally or deploy to Vercel for in-browser download.
+**Netlify / pure static hosts:** there is no `/api/pdf` unless you add your own backend; use the CLI locally, run **`npm start`** on a Node host, or deploy this repo to Railway for in-browser download.
 
 ## PDF from the UI (local dev)
 

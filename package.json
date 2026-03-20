@@ -11,11 +11,12 @@
   "bugs": {
     "url": "https://github.com/Ali-Karaki/md-mermaid-pdf-site/issues"
   },
-  "homepage": "https://md-mermaid-pdf-site.vercel.app/",
+  "homepage": "https://github.com/Ali-Karaki/md-mermaid-pdf-site#readme",
   "scripts": {
     "dev": "vite",
     "dev:api": "node server/pdf-api.mjs",
     "build": "vite build",
+    "start": "node server/prod.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -30,7 +31,6 @@
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
-    "@sparticuz/chromium": "^131.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

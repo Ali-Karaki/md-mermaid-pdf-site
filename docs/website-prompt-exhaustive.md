@@ -98,7 +98,7 @@ Replace naive “no install” with accurate bullets, for example:
 - **Margin** — mock or string presets (`20mm`, etc.); maps to `pdf_options.margin` when generating real PDF
 - **Export PDF**
   - **Default (static deploy):** dialog or sheet: real generation runs via `npx md-mermaid-pdf …` + copy button; optional link to GitHub README
-  - **Export:** POST `/api/pdf` with `{ markdown, mermaidConfig, documentTheme, pdf_format, margin }` → `application/pdf` blob download. **Vercel:** serverless `api/pdf.js`. **Local dev:** `npm run dev:api` + Vite proxy (no env flag)
+  - **Export:** POST `/api/pdf` with `{ markdown, mermaidConfig, documentTheme, pdf_format, margin }` → `application/pdf` blob download. **Production (Railway):** `server/prod.mjs` on the same origin. **Local dev:** `npm run dev:api` + Vite proxy (no env flag)
 
 **Example Markdown (must be valid — use exact fence)**
 
@@ -288,7 +288,7 @@ For **real** PDF download from the Vite app (optional, not static hosting):
 3. UI: POST `/api/pdf` with JSON body `{ markdown, mermaidConfig?, documentTheme?, pdf_format?, margin? }`; response `application/pdf`.  
 4. Env override: **`PDF_API_PORT`** if 3001 is taken.  
 
-Static deploy (e.g. Vercel static): omit API; use export dialog with CLI instructions only.
+Static-only hosts (no Node): omit API; use export dialog with CLI instructions only, or deploy the full Docker/Railway stack for `/api/pdf`.
 
 ---
 
