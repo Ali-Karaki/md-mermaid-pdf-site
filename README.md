@@ -2,6 +2,7 @@
 
 Marketing site and **live Markdown + Mermaid preview** for [**md-mermaid-pdf**](https://github.com/Ali-Karaki/md-mermaid-pdf) (Markdown → PDF with diagrams that render).
 
+- **Live site:** [md-mermaid-pdf-site.vercel.app](https://md-mermaid-pdf-site.vercel.app/)
 - **npm:** [md-mermaid-pdf](https://www.npmjs.com/package/md-mermaid-pdf)
 - **Library repo:** [github.com/Ali-Karaki/md-mermaid-pdf](https://github.com/Ali-Karaki/md-mermaid-pdf)
 
