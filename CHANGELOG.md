@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 
 - Vercel PDF API: pre-extract **`al2023.tar.br`** and call **`setupLambdaEnvironment('/tmp/al2023/lib')`** when `VERCEL=1` so Chromium finds **`libnss3.so`** (Sparticuz skips this outside Lambda)
+- Vercel **`includeFiles`** for `api/pdf.js`: ship **`md-mermaid-pdf/presets`**, **`mermaid/dist/mermaid.min.js`**, **`highlight.js/styles`**, **`md-to-pdf/dist`** (fixes **`ENOENT`** on `document-dark.css` and similar runtime path loads)
 
 ## [0.0.0] - 2026-03-21
 
