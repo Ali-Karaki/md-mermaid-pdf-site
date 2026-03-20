@@ -2,13 +2,29 @@
  * Vercel serverless: POST /api/pdf
  * Body: { markdown, mermaidConfig?, documentTheme?, pdf_format?, margin? }
  * Response: application/pdf (binary)
+ *
+ * Vercel is not detected as AWS Lambda by @sparticuz/chromium, so it skips
+ * extracting al2023.tar.br (libnss3, etc.). We pre-extract and set LD_LIBRARY_PATH.
  */
 
 import { createRequire } from 'module'
+import path from 'node:path'
 
 const require = createRequire(import.meta.url)
 const Chromium = require('@sparticuz/chromium')
 const { mdToPdf } = require('md-mermaid-pdf')
+const lambdafs = require('@sparticuz/chromium/build/lambdafs.js').default
+const { setupLambdaEnvironment } = require('@sparticuz/chromium/build/helper.js')
+
+const AL2023_LIB = '/tmp/al2023/lib'
+
+async function prepareChromiumForVercel() {
+  if (process.env.VERCEL !== '1') return
+  const chromiumRoot = path.dirname(require.resolve('@sparticuz/chromium/package.json'))
+  const al2023Pack = path.join(chromiumRoot, 'bin', 'al2023.tar.br')
+  await lambdafs.inflate(al2023Pack)
+  setupLambdaEnvironment(AL2023_LIB)
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -41,6 +57,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    await prepareChromiumForVercel()
     const executablePath = await Chromium.executablePath()
     const pdfOptions = {}
     if (json.pdf_format) pdfOptions.format = json.pdf_format
