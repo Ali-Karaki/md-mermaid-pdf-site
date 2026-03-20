@@ -24,6 +24,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Marketing **Use cases** section
 
+### Fixed
+
+- Vercel PDF API: pre-extract **`al2023.tar.br`** and call **`setupLambdaEnvironment('/tmp/al2023/lib')`** when `VERCEL=1` so Chromium finds **`libnss3.so`** (Sparticuz skips this outside Lambda)
+
 ## [0.0.0] - 2026-03-21
 
 ### Added
