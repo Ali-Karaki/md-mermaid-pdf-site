@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- **Railway / Docker PDF:** pass Chromium **`--no-sandbox`**, **`--disable-setuid-sandbox`**, **`--disable-dev-shm-usage`**, **`--disable-gpu`** via **`launch_options`** when running in Docker (`/.dockerenv`) or on Railway (`RAILWAY_*` env). Without this, Puppeteer fails as **root** with *Running as root without --no-sandbox is not supported* ([Puppeteer troubleshooting](https://pptr.dev/troubleshooting))
+
 ### Added
 
 - **Railway** production path: [`Dockerfile`](Dockerfile) (Debian Chromium + `PUPPETEER_EXECUTABLE_PATH`; build runs **`npm ci`** without **`NODE_ENV=production`** so **Vite** is installed, then **`npm prune --omit=dev`**), [`railway.toml`](railway.toml), [`server/prod.mjs`](server/prod.mjs) serving **`dist/`** and **`POST /api/pdf`**, shared [`server/pdf-handler.mjs`](server/pdf-handler.mjs), **`npm start`**
