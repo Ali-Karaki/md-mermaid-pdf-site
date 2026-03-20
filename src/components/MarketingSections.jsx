@@ -184,31 +184,6 @@ export function MarketingSections() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.25, duration: 0.35 }}
       >
-        <h2 className="text-2xl font-semibold text-center mb-8">Before vs after</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Card className="border-border/60">
-            <CardContent className="p-6">
-              <h3 className="font-medium text-muted-foreground">md-to-pdf</h3>
-              <img src="/before-code-block.svg" alt="Mermaid shown as code block" className="mt-3 w-full max-w-sm h-auto rounded" />
-              <p className="text-sm mt-2">Mermaid shown as plain code block in the PDF.</p>
-            </CardContent>
-          </Card>
-          <Card className="border-border/60">
-            <CardContent className="p-6">
-              <h3 className="font-medium text-primary">md-mermaid-pdf</h3>
-              <img src="/after-rendered.svg" alt="Mermaid rendered as diagram in PDF" className="mt-3 w-full max-w-[200px] h-auto" />
-              <p className="text-sm mt-2">Diagrams rendered directly in the PDF.</p>
-            </CardContent>
-          </Card>
-        </div>
-      </MotionSection>
-
-      <MotionSection
-        className="w-full max-w-4xl mt-16 md:mt-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.28, duration: 0.35 }}
-      >
         <h2 className="text-2xl font-semibold text-center mb-8">CLI cheat sheet</h2>
         <Card className="border-border/60">
           <CardContent className="p-6">
