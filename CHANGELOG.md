@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - `md-mermaid-pdf` → `^0.1.2` (npm readme / homepage metadata release)
 
+### Removed
+
+- Marketing “Before vs after” section and `public/before-code-block.svg` / `public/after-rendered.svg`
+
 ## [0.0.0] - 2026-03-21
 
 ### Added

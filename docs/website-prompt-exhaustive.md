@@ -200,12 +200,7 @@ Group for scannability; include **all** relevant bullets:
 - Node ≥ 20.16, npm ≥ 10.8 (engines)  
 - CommonJS package; ESM via interop  
 
-### 4.7 Before vs after
-
-- **Before:** Mermaid fenced block appears as monospace code in PDF  
-- **After:** Diagram renders (use README assets or placeholders: SVG/PNG as available)
-
-### 4.8 Use cases
+### 4.7 Use cases
 
 - Engineering & architecture docs  
 - Runbooks, ADRs, internal wikis exported to PDF  
@@ -213,7 +208,7 @@ Group for scannability; include **all** relevant bullets:
 - Slide-style PDFs (`preset: 'slides'`)  
 - CI-generated PDF artifacts (Action + `mermaidSource: 'bundled'`)  
 
-### 4.9 Power user / “CLI cheat sheet”
+### 4.8 Power user / “CLI cheat sheet”
 
 Short code block section:
 
@@ -231,7 +226,7 @@ npx mmdpdf doc.md   # alias
 
 Link to full README for programmatic options.
 
-### 4.10 Footer
+### 4.9 Footer
 
 - npm, GitHub, License **MIT**  
 - Links: **Issues**, **Changelog** (`CHANGELOG.md` on GitHub), **Recipes** (`docs/recipes.md`), optional **Contributing** / **Security** if present in repo  
