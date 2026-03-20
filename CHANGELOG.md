@@ -20,6 +20,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Demo (desktop): **Markdown** and **Preview** are a single full-width column with a tab toggle; settings stay in the sidebar (no three narrow columns)
 - **Download PDF** posts to `/api/pdf` and saves the file (no modal). Vercel: `api/pdf.js` + `@sparticuz/chromium`. Local: `npm run dev:api` + `npm run dev` (proxy). `VITE_PDF_API` removed
 
+### Removed
+
+- Marketing **Use cases** section
+
 ## [0.0.0] - 2026-03-21
 
 ### Added
