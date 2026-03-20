@@ -43,6 +43,8 @@ npm start
 2. After the first successful deploy: **Settings → Networking → Generate domain** (or attach your own).
 3. Optional: increase **memory** if large Mermaid diagrams time out (PDF generation is Chromium-heavy).
 
+**Chromium in Docker:** the app adds **`--no-sandbox`** (etc.) when it detects Docker or Railway, because the process often runs as **root** in containers and stock Chromium refuses that without those flags. This is normal for headless PDF on PaaS, not a sign Railway is “not a real server.”
+
 **Cursor + Railway MCP:** add the [Railway MCP server](https://docs.railway.com/reference/mcp-server) (see [`.cursor/mcp.json`](.cursor/mcp.json) in this repo). Install and log in with the [Railway CLI](https://docs.railway.com/cli) first (`railway login`).
 
 **Netlify / pure static hosts:** there is no `/api/pdf` unless you add your own backend; use the CLI locally, run **`npm start`** on a Node host, or deploy this repo to Railway for in-browser download.
