@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - **Deploy target:** **Railway** (Docker) instead of **Vercel**; removed **`vercel.json`**, **`api/pdf.js`**, and **`@sparticuz/chromium`**
-- `md-mermaid-pdf` → `^0.1.2` (npm readme / homepage metadata release)
+- **`md-mermaid-pdf`** → **`^0.1.4`** (preset resolve / `package.json` export; was `^0.1.2`)
 
 ### Removed
 

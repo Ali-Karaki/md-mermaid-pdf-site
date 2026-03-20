@@ -1,6 +1,6 @@
 # Exhaustive website prompt: md-mermaid-pdf marketing + demo
 
-**Purpose:** Single source of truth for building the public marketing site and live demo (e.g. Vercel v0, Cursor, or human designers). This document is **not** the old “v0 product version” scope—it is **complete** relative to the **md-mermaid-pdf** product (library, CLI, ecosystem).
+**Purpose:** Single source of truth for building the public marketing site and live demo (e.g. Cursor, v0-style tools, or human designers). This document is **not** the old “v0 product version” scope—it is **complete** relative to the **md-mermaid-pdf** product (library, CLI, ecosystem).
 
 **Repositories:** This file lives in **`md-mermaid-pdf-site`** (this Vite app). The npm package and library source live in [**md-mermaid-pdf**](https://github.com/Ali-Karaki/md-mermaid-pdf) — Markdown → PDF with Mermaid diagrams rendered (not left as fenced code). Built on [md-to-pdf](https://github.com/simonhaenisch/md-to-pdf) (Marked + Puppeteer).
 
@@ -43,7 +43,7 @@ Use this wording on the site so marketing matches engineering.
 
 ## 3. Design direction
 
-- **Aesthetic:** Clean, modern, developer-focused; Vercel / Stripe–adjacent (not a generic template).
+- **Aesthetic:** Clean, modern, developer-focused; polished SaaS marketing feel (Stripe-adjacent restraint, not a generic template).
 - **Typography:** Strong hierarchy, comfortable line length, monospace for commands.
 - **Layout:** Subtle shadows, rounded cards, generous spacing, fully responsive.
 - **Default theme:** Dark mode default; optional light toggle if it fits the stack.
