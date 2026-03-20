@@ -12,23 +12,8 @@ import { SettingsPanel } from '@/components/SettingsPanel'
 import { SAMPLE_MD, EMPTY_MD } from '@/demo/SAMPLE_MD'
 import { cn } from '@/lib/utils'
 
-const PANE_MIN_H = 'min-h-[min(420px,52vh)]'
-
-function DemoPane({ title, children, className }) {
-  return (
-    <div
-      className={cn(
-        'flex flex-col rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden min-h-0',
-        className,
-      )}
-    >
-      <div className="shrink-0 border-b border-border/50 bg-muted/20 px-4 py-3">
-        <h3 className="text-sm font-medium tracking-tight">{title}</h3>
-      </div>
-      <div className="flex-1 min-h-0 p-4 flex flex-col">{children}</div>
-    </div>
-  )
-}
+/** Main editor/preview area — full width when toggling (desktop) */
+const MAIN_PANE_MIN_H = 'min-h-[min(480px,58vh)]'
 
 export function DemoSection() {
   const [md, setMd] = useState(EMPTY_MD)
@@ -36,16 +21,18 @@ export function DemoSection() {
   const [pageTheme, setPageTheme] = useState('dark')
   const [mermaidTheme, setMermaidTheme] = useState('neutral')
   const [margin, setMargin] = useState('20mm')
+  /** Desktop: which single view is shown in the main column */
+  const [deskMainTab, setDeskMainTab] = useState('markdown')
 
   const previewShell = (mobile) =>
     pageTheme === 'light'
       ? cn(
-          'flex-1 rounded-lg border border-border/60 bg-white text-black overflow-auto',
-          mobile ? 'min-h-[250px]' : PANE_MIN_H,
+          'w-full rounded-lg border border-border/60 bg-white text-black overflow-auto',
+          mobile ? 'min-h-[250px]' : cn('flex-1', MAIN_PANE_MIN_H),
         )
       : cn(
-          'flex-1 rounded-lg border border-border/60 bg-muted/20 overflow-auto',
-          mobile ? 'min-h-[250px]' : PANE_MIN_H,
+          'w-full rounded-lg border border-border/60 bg-muted/20 overflow-auto',
+          mobile ? 'min-h-[250px]' : cn('flex-1', MAIN_PANE_MIN_H),
         )
 
   const settingsProps = {
@@ -72,7 +59,8 @@ export function DemoSection() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">Demo</h2>
           <p className="text-sm text-muted-foreground mt-1.5 max-w-xl">
-            Edit markdown, preview Mermaid in the browser, then export — settings apply to PDF output.
+            Switch between Markdown and Preview for a full-width view — settings stay on the side (on
+            large screens).
           </p>
         </div>
         <div className="flex flex-wrap gap-2 shrink-0">
@@ -87,44 +75,76 @@ export function DemoSection() {
         </div>
       </div>
 
-      {/* Desktop / large tablet: editor + preview get most width; settings sidebar */}
+      {/* Desktop: main column toggles Markdown | Preview; settings sidebar */}
       <div
         className={cn(
           'hidden lg:grid gap-8 xl:gap-10 items-stretch',
-          'lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1.15fr)_minmax(260px,300px)]',
+          'lg:grid-cols-[minmax(0,1fr)_minmax(260px,300px)]',
         )}
       >
-        <DemoPane title="Markdown">
-          <Textarea
-            value={md}
-            onChange={(e) => setMd(e.target.value)}
-            placeholder="Paste Markdown with ```mermaid blocks…"
-            className={cn(
-              'flex-1 w-full font-mono text-sm resize-y border-border/60',
-              PANE_MIN_H,
-            )}
-            spellCheck={false}
-          />
-        </DemoPane>
-        <DemoPane title="Preview">
-          <div className={previewShell(false)}>
-            <MermaidPreview markdown={md} theme={mermaidTheme} />
-          </div>
-        </DemoPane>
-        <aside className="flex flex-col rounded-xl border border-border/60 bg-muted/10 shadow-sm overflow-hidden">
+        <div
+          className={cn(
+            'flex flex-col rounded-xl border border-border/60 bg-card shadow-sm overflow-hidden min-h-0',
+            MAIN_PANE_MIN_H,
+          )}
+        >
+          <Tabs
+            value={deskMainTab}
+            onValueChange={setDeskMainTab}
+            className="flex flex-col flex-1 min-h-0"
+          >
+            <div className="shrink-0 border-b border-border/50 bg-muted/20 px-4 py-3">
+              <TabsList
+                className="grid w-full max-w-md grid-cols-2 h-auto p-1 gap-0.5"
+                aria-label="Markdown or preview"
+              >
+                <TabsTrigger value="markdown" className="px-4 py-2">
+                  Markdown
+                </TabsTrigger>
+                <TabsTrigger value="preview" className="px-4 py-2">
+                  Preview
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            <TabsContent
+              value="markdown"
+              className="flex-1 flex flex-col min-h-0 mt-0 px-4 pb-4 pt-4 focus-visible:outline-none data-[state=inactive]:hidden"
+            >
+              <Textarea
+                value={md}
+                onChange={(e) => setMd(e.target.value)}
+                placeholder="Paste Markdown with ```mermaid blocks…"
+                className={cn(
+                  'flex-1 w-full min-h-[min(400px,50vh)] font-mono text-sm resize-y border-border/60',
+                )}
+                spellCheck={false}
+              />
+            </TabsContent>
+            <TabsContent
+              value="preview"
+              className="flex-1 flex flex-col min-h-0 mt-0 p-4 focus-visible:outline-none data-[state=inactive]:hidden"
+            >
+              <div className={cn(previewShell(false), 'flex flex-col min-h-[min(400px,50vh)]')}>
+                <MermaidPreview markdown={md} theme={mermaidTheme} />
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        <aside className="flex flex-col rounded-xl border border-border/60 bg-muted/10 shadow-sm overflow-hidden min-h-0">
           <div className="shrink-0 border-b border-border/50 bg-muted/20 px-4 py-3">
             <h3 className="text-sm font-medium tracking-tight">Settings</h3>
             <p className="text-xs text-muted-foreground mt-1 leading-snug">
               PDF and diagram options
             </p>
           </div>
-          <div className="flex-1 p-5 overflow-y-auto">
+          <div className="flex-1 p-5 overflow-y-auto min-h-0">
             <SettingsPanel {...settingsProps} />
           </div>
         </aside>
       </div>
 
-      {/* Mobile / small tablet */}
+      {/* Mobile / small tablet: Markdown | Preview | Settings */}
       <div className="lg:hidden">
         <Tabs defaultValue="markdown" className="w-full gap-4">
           <TabsList className="grid w-full h-auto grid-cols-3 gap-1 p-1.5 bg-muted/30">
