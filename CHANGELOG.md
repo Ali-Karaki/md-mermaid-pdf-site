@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Vercel PDF API: pre-extract **`al2023.tar.br`** and call **`setupLambdaEnvironment('/tmp/al2023/lib')`** when `VERCEL=1` so Chromium finds **`libnss3.so`** (Sparticuz skips this outside Lambda)
 - Vercel **`includeFiles`** for `api/pdf.js`: ship full **`md-mermaid-pdf`** tree, **`mermaid.min.js`**, **`highlight.js/styles`**, **`md-to-pdf/dist`** (fixes **`ENOENT`** on preset CSS and similar runtime loads). CI checks key files exist after **`npm ci`**. **`api/pdf`** logs **`BUNDLE_MISSING`** on Vercel if the preset file is still absent from the bundle
+- Vercel **`vercel.json`**: `functions.*.includeFiles` must be a **single glob string** (use `{a,b}/**` brace expansion for multiple paths). A JSON **array** fails Vercel’s config validation, which broke every deployment after `includeFiles` was introduced
 
 ## [0.0.0] - 2026-03-21
 
