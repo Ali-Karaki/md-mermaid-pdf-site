@@ -3,7 +3,13 @@
   "installCommand": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1 npm ci",
   "functions": {
     "api/pdf.js": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "includeFiles": [
+        "node_modules/md-mermaid-pdf/presets/**",
+        "node_modules/mermaid/dist/mermaid.min.js",
+        "node_modules/highlight.js/styles/**",
+        "node_modules/md-to-pdf/dist/**"
+      ]
     }
   }
 }

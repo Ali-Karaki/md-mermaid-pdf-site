@@ -32,7 +32,7 @@ npm run preview
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
 
-`vercel.json` skips downloading Puppeteer’s bundled Chromium at install time; **Download PDF** uses the serverless route `api/pdf.js` (`@sparticuz/chromium` + `md-mermaid-pdf`). On Vercel, `api/pdf.js` extracts **`al2023.tar.br`** and sets **`LD_LIBRARY_PATH`** (Sparticuz only does this automatically on AWS Lambda; without it Chromium fails with missing **`libnss3.so`**). **Function timeout** is set to 60s — on the Hobby plan Vercel may cap execution shorter; upgrade or simplify docs if exports time out.
+`vercel.json` skips downloading Puppeteer’s bundled Chromium at install time; **Download PDF** uses the serverless route `api/pdf.js` (`@sparticuz/chromium` + `md-mermaid-pdf`). On Vercel, `api/pdf.js` extracts **`al2023.tar.br`** and sets **`LD_LIBRARY_PATH`** (Sparticuz only does this automatically on AWS Lambda; without it Chromium fails with missing **`libnss3.so`**). **`vercel.json`** also lists **`includeFiles`** so the function bundle contains assets loaded by path at runtime (`md-mermaid-pdf/presets`, bundled **`mermaid.min.js`**, **`highlight.js`** styles, **`md-to-pdf/dist`**). Without those, you may see **`ENOENT`** for e.g. `document-dark.css`. **Function timeout** is set to 60s — on the Hobby plan Vercel may cap execution shorter; upgrade or simplify docs if exports time out.
 
 **Netlify / pure static hosts:** there is no `/api/pdf` unless you add your own backend; use the CLI locally or deploy to Vercel for in-browser download.
 
