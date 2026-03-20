@@ -98,7 +98,7 @@ Replace naive “no install” with accurate bullets, for example:
 - **Margin** — mock or string presets (`20mm`, etc.); maps to `pdf_options.margin` when generating real PDF
 - **Export PDF**
   - **Default (static deploy):** dialog or sheet: real generation runs via `npx md-mermaid-pdf …` + copy button; optional link to GitHub README
-  - **Optional dev mode:** if `VITE_PDF_API` (or equivalent) is set, POST to `/api/pdf` with `{ markdown, mermaidConfig, documentTheme, pdf_format, margin }` and download blob — document that this requires local Node API + Chromium
+  - **Export:** POST `/api/pdf` with `{ markdown, mermaidConfig, documentTheme, pdf_format, margin }` → `application/pdf` blob download. **Vercel:** serverless `api/pdf.js`. **Local dev:** `npm run dev:api` + Vite proxy (no env flag)
 
 **Example Markdown (must be valid — use exact fence)**
 
@@ -292,7 +292,7 @@ When the library gains features, update **§4.6** and **§4.9** in this file fir
 For **real** PDF download from the Vite app (optional, not static hosting):
 
 1. Terminal A — from **repository root** of `md-mermaid-pdf-site`: `npm run dev:api` (default **port 3001**).  
-2. Terminal B — `VITE_PDF_API=1 npm run dev` (Vite proxies `/api` → `localhost:3001`).  
+2. Terminal B — `npm run dev` (Vite proxies `/api` → `localhost:3001`).  
 3. UI: POST `/api/pdf` with JSON body `{ markdown, mermaidConfig?, documentTheme?, pdf_format?, margin? }`; response `application/pdf`.  
 4. Env override: **`PDF_API_PORT`** if 3001 is taken.  
 

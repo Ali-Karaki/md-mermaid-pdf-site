@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1 npm ci",
+  "functions": {
+    "api/pdf.js": {
+      "maxDuration": 60
+    }
+  }
+}

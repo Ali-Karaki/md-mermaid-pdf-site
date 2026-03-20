@@ -5,8 +5,7 @@
  *
  * Uses the published `md-mermaid-pdf` package (Node + Chromium / Puppeteer).
  * Run with: npm run dev:api
- * Then start the app (npm run dev) and set VITE_PDF_API=1 to enable
- * the "Generate PDF (local)" button.
+ * With npm run dev, Vite proxies /api → this server (no env flag needed).
  */
 
 import { createServer } from 'http';
