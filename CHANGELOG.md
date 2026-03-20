@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **GitHub Actions → Railway:** [`.github/workflows/deploy-railway.yml`](.github/workflows/deploy-railway.yml) runs `railway up` on push to **`main`** using secret **`RAILWAY_TOKEN`** (project token); optional repo variables **`RAILWAY_SERVICE`**, **`RAILWAY_ENVIRONMENT`**. README documents native Railway GitHub deploy vs Actions to avoid duplicate deploys
+
 ### Fixed
 
 - **Railway / Docker PDF:** pass Chromium **`--no-sandbox`**, **`--disable-setuid-sandbox`**, **`--disable-dev-shm-usage`**, **`--disable-gpu`** via **`launch_options`** when running in Docker (`/.dockerenv`) or on Railway (`RAILWAY_*` env). Without this, Puppeteer fails as **root** with *Running as root without --no-sandbox is not supported* ([Puppeteer troubleshooting](https://pptr.dev/troubleshooting))
