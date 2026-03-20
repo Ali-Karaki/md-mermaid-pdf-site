@@ -20,4 +20,8 @@ jobs:
       - run: npm ci
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: '1'
+      - name: Verify PDF API runtime files exist after install
+        run: |
+          test -f node_modules/md-mermaid-pdf/presets/document-dark.css
+          test -f node_modules/mermaid/dist/mermaid.min.js
       - run: npm run build
