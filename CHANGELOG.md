@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - Demo layout: wider max width, larger column gaps, asymmetric grid (more space for Markdown + Preview, fixed-width settings sidebar), taller panes (`min(420px, 52vh)`), clearer panel chrome and intro copy
+- Demo (desktop): **Markdown** and **Preview** are a single full-width column with a tab toggle; settings stay in the sidebar (no three narrow columns)
 
 ## [0.0.0] - 2026-03-21
 
