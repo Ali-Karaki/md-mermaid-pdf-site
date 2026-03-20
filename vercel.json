@@ -5,7 +5,7 @@
     "api/pdf.js": {
       "maxDuration": 60,
       "includeFiles": [
-        "node_modules/md-mermaid-pdf/presets/**",
+        "node_modules/md-mermaid-pdf/**",
         "node_modules/mermaid/dist/mermaid.min.js",
         "node_modules/highlight.js/styles/**",
         "node_modules/md-to-pdf/dist/**"

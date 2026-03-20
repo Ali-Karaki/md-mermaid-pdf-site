@@ -8,6 +8,7 @@
  */
 
 import { createRequire } from 'module'
+import fs from 'node:fs'
 import path from 'node:path'
 
 const require = createRequire(import.meta.url)
@@ -58,6 +59,12 @@ export default async function handler(req, res) {
 
   try {
     await prepareChromiumForVercel()
+    if (process.env.VERCEL === '1') {
+      const probe = path.join(process.cwd(), 'node_modules/md-mermaid-pdf/presets/document-dark.css')
+      if (!fs.existsSync(probe)) {
+        console.error('[api/pdf] BUNDLE_MISSING expected preset at', probe)
+      }
+    }
     const executablePath = await Chromium.executablePath()
     const pdfOptions = {}
     if (json.pdf_format) pdfOptions.format = json.pdf_format
