@@ -15,7 +15,7 @@ npm ci
 npm run dev
 ```
 
-Open the URL Vite prints (e.g. `http://localhost:5173/`).
+Open the URL Vite prints (e.g. `http://localhost:5173/`). **Documentation** (full library reference: CLI, API, options): [`/docs`](http://localhost:5173/docs).
 
 ## Build & preview
 
