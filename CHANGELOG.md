@@ -8,7 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **Documentation** route **`/docs`**: in-app reference for **md-mermaid-pdf** (CLI flags, programmatic exports, library-specific options, inherited **md-to-pdf** options link, front matter, batch/compose, Docker, GitHub Action, troubleshooting). **`react-router-dom`**, [`SiteNav`](src/components/SiteNav.jsx) / [`SiteFooter`](src/components/SiteFooter.jsx), [`DocumentationPage`](src/pages/DocumentationPage.jsx) (code-split with **`React.lazy`** + **`Suspense`**)
+- **404:** unknown paths redirect to **`/`** via **`react-router-dom`** catch-all route
 - **GitHub Actions → Railway:** [`.github/workflows/deploy-railway.yml`](.github/workflows/deploy-railway.yml) runs `railway up` on push to **`main`** using secret **`RAILWAY_TOKEN`** (project token); optional repo variables **`RAILWAY_SERVICE`**, **`RAILWAY_ENVIRONMENT`**. README documents native Railway GitHub deploy vs Actions to avoid duplicate deploys
+
+### Changed
+
+- **Docs a11y:** skip link to **`#docs-content`**, TOC **`nav`** uses **`aria-labelledby`** for “On this page”
+- **Layout:** footer horizontal padding matches header (**`px-4 sm:px-6`**); **`overflow-x-hidden`** only on app shell (not **`body`**)
 
 ### Fixed
 
